@@ -1,0 +1,59 @@
+<div class="contenedor-principal">
+  <h2 class="fade-in">Administración de Parqueaderos</h2>
+
+  <div class="fade-in" *ngIf="!editando">
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Dirección</th>
+          <th>Capacidad Total</th>
+          <th>Capacidad Disponibles</th>
+          <th>Precio Parking</th>
+          <th>$$$  DIA</th>
+          <th>Editar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of parqueaderos">
+          <td data-label="Nombre">{{ p.name }}</td>
+          <td data-label="Dirección">{{ p.address }}</td>
+          <td data-label="Capacidad Total">{{ p.totalCapacity }}</td>
+          <td data-label="Capacidad Disponibles">{{ p.totalSpecialPlace }}</td>
+          <td data-label="Precio Parking">${{ p.priceParking }}</td>
+          <td data-label="$$$  DIA">${{ p.totalMoney }}</td>
+
+          <td data-label="Editar">
+            <button (click)="seleccionarParaEditar(p)">Editar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="fade-in" *ngIf="editando">
+    <h3>Editando: {{ editando.name }}</h3>
+    <form (ngSubmit)="guardarCambios()" class="formulario-edicion">
+      <label>Nombre:
+        <input [(ngModel)]="editando.name" name="nombre">
+      </label><br>
+      <label>Dirección:
+        <input [(ngModel)]="editando.address" name="direccion">
+      </label><br>
+      <label>Total Capacidad:
+        <input type="number" [(ngModel)]="editando.totalCapacity" name="totalCapacity">
+      </label><br>
+      <label>Total Disponibles:
+        <input type="number" [(ngModel)]="editando.totalSpecialPlace" name="totalSpecialPlace">
+      </label><br>
+      <label>Precio Parking: $
+        <input type="number" [(ngModel)]="editando.priceParking" name="priceParking">
+      </label><br>
+      <label>Dirección:
+        <input [(ngModel)]="editando.urlImg" name="urlImg">
+      </label><br>
+      <button type="submit">Guardar</button>
+      <button type="button" (click)="cancelarEdicion()">Cancelar</button>
+    </form>
+  </div>
+</div>

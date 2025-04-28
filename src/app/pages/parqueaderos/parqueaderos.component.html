@@ -1,0 +1,24 @@
+<div class="galeria">
+  <div class="card" *ngFor="let parqueadero of parqueaderos" (click)="abrirDetalle(parqueadero)">
+    <img [src]="parqueadero.urlImg || 'assets/default.jpg'" alt="{{ parqueadero.name }}" />
+    <div class="card-body">
+      <h3>{{ parqueadero.name }}</h3>
+      <p><strong>Dirección:</strong> {{ parqueadero.address }}</p>
+      <button class="ver-detalles">Ver Detalles</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" *ngIf="parqueaderoDetalle">
+  <div class="modal-content">
+    <span class="close" (click)="cerrarDetalle()">&times;</span>
+    <h3>{{ parqueaderoDetalle.name }}</h3>
+    <img [src]="parqueaderoDetalle.urlImg || 'assets/default.jpg'" alt="{{ parqueaderoDetalle.name }}" class="modal-img"/>
+    <p><strong>Dirección:</strong> {{ parqueaderoDetalle.address }}</p>
+    <p><strong>Capacidad Total:</strong> {{ parqueaderoDetalle.totalCapacity }}</p>
+    <p><strong>Lugares Especiales:</strong> {{ parqueaderoDetalle.totalSpecialPlace }}</p>
+    <p><strong>Lugares Disponibles:</strong> {{ parqueaderoDetalle.totalAvaliablePlace }}</p>
+    <p><strong>Precio Parking:</strong> ${{ parqueaderoDetalle.priceParking }}</p>
+    <button class="cerrar-btn" (click)="cerrarDetalle()">Cerrar</button>
+  </div>
+</div>

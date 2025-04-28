@@ -1,0 +1,63 @@
+<div class="contenedor-principal">
+  <div class="reservacion-container fade-in">
+    <h2>Reservar Estacionamiento</h2>
+
+    <div class="alert error fade-in" *ngIf="error">{{ error }}</div>
+    <div class="alert success fade-in" *ngIf="mensaje">{{ mensaje }}</div>
+
+    <!-- Formulario de búsqueda -->
+    <div class="form-group fade-in">
+      <label for="parkingId">Selecciona un Estacionamiento:</label>
+      <select id="parkingId" [(ngModel)]="idParkingSeleccionado" (change)="onParkingChange($event)">
+        <option [ngValue]="null" disabled selected>-- Selecciona --</option>
+        <option *ngFor="let parking of parkingsDisponibles" [value]="parking.idParking">
+          {{ parking.name }}
+        </option>
+      </select>
+      <br />
+      <label for="placa">Número de Placa:</label>
+      <input id="placa" [(ngModel)]="placa" placeholder="Ejemplo: ABC123" />
+      <button (click)="buscarReservas()" *ngIf="idParkingSeleccionado>0">Buscar Reservas</button>
+    </div>
+
+    <!-- Mostrar reserva activa -->
+    <div *ngIf="reservaActiva" class="card-reserva fade-in">
+      <h3>Reserva Activa o Pendiente</h3>
+      <p><strong>ID Reserva:</strong> {{ reservaActiva.idReservation }}</p>
+      <p><strong>Placa:</strong> {{ reservaActiva.licensePlateNumber }}</p>
+      <p><strong>Estacionamiento:</strong> {{ reservaActiva.parkingName }}</p>
+      <p><strong>Estado:</strong> {{ GetLabetlStatus(reservaActiva) }}</p>
+    </div>
+
+    <!-- Formulario para nueva reserva -->
+    <div *ngIf="createReservation" class="fade-in">
+      <h3>Crear Nueva Reserva</h3>
+      <button (click)="reservar()">Reservar</button>
+    </div>
+
+    <!-- Historial de reservas -->
+    <div *ngIf="reservasFinalizadas.length > 0" class="fade-in">
+      <h3>Historial de Reservas Finalizadas</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>ID Reserva</th>
+            <th>Placa</th>
+            <th>Estacionamiento</th>
+            <th>Estado</th>
+            <th>Fecha Reserva</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reserva of reservasFinalizadas">
+            <td>{{ reserva.idReservation }}</td>
+            <td>{{ reserva.licensePlateNumber }}</td>
+            <td>{{ reserva.parkingName }}</td>
+            <td>{{ GetLabetlStatus(reserva) }}</td>
+            <td>{{ reserva.reservationDate}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+
+<nav class="navbar">
+  <div class="navbar-logo">
+    <span>Eventos CDMX- parking</span>
+  </div>
+
+  <ul class="navbar-links">
+    <li><a routerLink="/" routerLinkActive="active">Inicio</a></li>
+    <li><a routerLink="/parqueaderos" >Parking</a></li>
+    <li><a routerLink="/mis-reservas" >Mis Reservas</a></li>
+    <li *ngIf="optionsEnabled"><a routerLink="/admin-parqueaderos" >Admin Parqueaderos</a></li>
+    <li *ngIf="optionsEnabled"><a routerLink="/registro-entrada" >Registro Entrada</a></li>
+    <li *ngIf="optionsEnabled"><a routerLink="/registro-salida" >Registro Salida</a></li>
+  </ul>
+  <button class="lock-button" (click)="openModal()">
+    <span [class]="isUnlocked ? 'icon-unlock' : 'icon-lock'"></span>
+  </button>
+</nav>
+
+
+<div class="modal" *ngIf="showModal">
+  <div class="modal-content">
+    <h2>Ingrese contraseña</h2>
+    <input type="password" [(ngModel)]="passwordInput" placeholder="Contraseña..." />
+    <div class="modal-actions">
+      <button (click)="validatePassword()">Acceder</button>
+      <button (click)="closeModal()">Cancelar</button>
+    </div>
+  </div>
+</div>

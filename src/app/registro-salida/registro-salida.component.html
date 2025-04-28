@@ -1,0 +1,28 @@
+<div class="registrar-salida-container">
+  <h2>Registrar Salida</h2>
+
+  <!-- Mensajes de éxito o error -->
+  <div *ngIf="mensaje" class="alert success">
+    {{ mensaje }}
+  </div>
+  <div *ngIf="error" class="alert error">
+    {{ error }}
+  </div>
+
+  <!-- Formulario de salida -->
+  <div class="form-group">
+    <label for="idParking">Selecciona Estacionamiento:</label>
+    <select id="idParking" [(ngModel)]="idParking">
+      <option [ngValue]="null" disabled selected>-- Selecciona --</option>
+      <option *ngFor="let parking of parkingsDisponibles" [value]="parking.idParking">
+        {{ parking.name }}
+      </option>
+    </select>
+    <br />
+
+    <label for="placa">Número de Placa:</label>
+    <input id="placa" [(ngModel)]="placa" placeholder="Ejemplo: ABC123" />
+
+    <button (click)="registrarSalida()" *ngIf="idParking">Registrar Salida</button>
+  </div>
+</div>

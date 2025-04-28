@@ -1,0 +1,34 @@
+<div class="eventos-especiales-container">
+  <h2>Eventos Especiales</h2>
+  <p class="descripcion">
+    Disfruta de los eventos y reserva tu lugar con anticipación para asegurar tu acceso preferente.
+  </p>
+
+  <!-- Tarjeta del evento -->
+  <div class="evento-card animate-card">
+    <div class="evento-card-content">
+      <!-- Imagen a la izquierda -->
+      <div class="icono-container">
+        <img src="{{ eventoEspecial.icono }}" alt="Icono del evento" class="icono-imagen" />
+      </div>
+
+      <!-- Texto a la derecha -->
+      <div class="evento-info">
+        <div class="tipo-evento">{{ eventoEspecial.tipoEvento }}</div>
+        <div class="nombre-evento">{{ eventoEspecial.nombreEvento }}</div>
+        <div class="detalles-evento">{{ eventoEspecial.detallesEvento }}</div>
+
+        <button class="boton-reservacion" (click)="irAReservaciones()">
+          {{ eventoEspecial.botonTexto }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sobre-eventos">
+    <h3>Sobre los eventos</h3>
+    <p class="descripcion">
+      Consulta la información de los próximos eventos y reserva tu estacionamiento para una mejor experiencia.
+    </p>
+  </div>
+</div>
